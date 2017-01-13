@@ -1,13 +1,29 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Text;
 
 namespace naija_cover.Runtime
 {
     public class CoverageTracker
     {
-        private static Dictionary<string, Dictionary<int, bool>> coverage = new Dictionary<string, Dictionary<int, bool>>();
+        private static Dictionary<string, Dictionary<int, bool>> coverage =
+            new Dictionary<string, Dictionary<int, bool>>();
 
-        public static void WriteCoverageToFile() {}
+        public static void WriteCoverageToFile()
+        {
+            string lcovcoverage = GenerateLcov();
+            string coverageReportPath = Environment.GetEnvironmentVariable("coverage.report.path") ??
+                                        "coverage_report.lcov";
+            try
+            {
+                File.WriteAllText(coverageReportPath, lcovcoverage);
+            }
+            catch (IOException ex)
+            {
+                throw new Exception("Error while writing coverage", ex);
+            }
+        }
 
         public static string GenerateLcov()
         {
