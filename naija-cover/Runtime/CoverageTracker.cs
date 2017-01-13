@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace naija_cover
+namespace naija_cover.Runtime
 {
     public class CoverageTracker
     {
@@ -8,13 +8,13 @@ namespace naija_cover
 
         public static void WriteCoverageToFile() {}
 
-        public static void MarkExecuted(string filName, int line)
+        public static void MarkExecuted(string fileName, int line)
         {
-            if (!coverage.ContainsKey(filName))
+            if (!coverage.ContainsKey(fileName))
             {
-                coverage.Add(filName, new Dictionary<int, bool>());
+                coverage.Add(fileName, new Dictionary<int, bool>());
             }
-            coverage[filName].Add(line, true);
+            coverage[fileName].Add(line, true);
         }
     }
 }

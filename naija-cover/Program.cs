@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
+using naija_cover.Runtime;
 
 namespace naija_cover
 {
@@ -8,6 +8,8 @@ namespace naija_cover
         public static void Main(string[] args)
         {
             Console.WriteLine("Hello World");
+            //
+            AppDomain.CurrentDomain.ProcessExit += (sender, eventArgs) => CoverageTracker.WriteCoverageToFile();
         }
     }
 }
