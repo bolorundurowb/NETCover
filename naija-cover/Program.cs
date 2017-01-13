@@ -7,7 +7,7 @@ namespace naija_cover
     {
         public static void Main(string[] args)
         {
-
+            Console.WriteLine("Hello World");
         }
     }
 }
