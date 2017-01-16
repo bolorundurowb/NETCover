@@ -40,6 +40,15 @@ namespace naija_cover.Runtime
             return sb.ToString();
         }
 
+        public static void MarkExecutable(string fileName, int line)
+        {
+            if (!coverage.ContainsKey(fileName))
+            {
+                coverage.Add(fileName, new Dictionary<int, bool>());
+            }
+            coverage[fileName].Add(line, false);
+        }
+
         public static void MarkExecuted(string fileName, int line)
         {
             if (!coverage.ContainsKey(fileName))
@@ -47,6 +56,54 @@ namespace naija_cover.Runtime
                 coverage.Add(fileName, new Dictionary<int, bool>());
             }
             coverage[fileName].Add(line, true);
+        }
+
+        public static byte MarkExecuted(string fileName, int line, byte expression)
+        {
+            MarkExecuted(fileName, line);
+            return expression;
+        }
+
+        public static char MarkExecuted(string fileName, int line, char expression)
+        {
+            MarkExecuted(fileName, line);
+            return expression;
+        }
+
+        public static int MarkExecuted(string fileName, int line, int expression)
+        {
+            MarkExecuted(fileName, line);
+            return expression;
+        }
+
+        public static long MarkExecuted(string fileName, int line, long expression)
+        {
+            MarkExecuted(fileName, line);
+            return expression;
+        }
+
+        public static bool MarkExecuted(string fileName, int line, bool expression)
+        {
+            MarkExecuted(fileName, line);
+            return expression;
+        }
+
+        public static float MarkExecuted(string fileName, int line, float expression)
+        {
+            MarkExecuted(fileName, line);
+            return expression;
+        }
+
+        public static double MarkExecuted(string fileName, int line, double expression)
+        {
+            MarkExecuted(fileName, line);
+            return expression;
+        }
+
+        public static T MarkExecuted<T>(string fileName, int line, T expression)
+        {
+            MarkExecuted(fileName, line);
+            return expression;
         }
     }
 }
