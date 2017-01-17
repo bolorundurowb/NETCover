@@ -17,7 +17,7 @@ namespace naija_cover
 
         private SyntaxNode MakeCoverageTrackingCall(TypeDeclarationSyntax node)
         {
-            MakeCoverageTrackingCall(node, true);
+            return MakeCoverageTrackingCall(node, true);
         }
 
         private SyntaxNode MakeCoverageTrackingCall(TypeDeclarationSyntax node, bool passInNode)
@@ -36,8 +36,8 @@ namespace naija_cover
             SeparatedSyntaxList<ArgumentSyntax> argumentList;
             if (passInNode)
             {
-                var nodeArg = Argument(LiteralExpression())
-                argumentList = SeparatedList(new[] {filePathArg, lineNumberArg, nodeArg});
+//                var nodeArg = Argument();
+                argumentList = SeparatedList(new[] {filePathArg, lineNumberArg, /*nodeArg*/});
             }
             else
             {
