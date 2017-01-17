@@ -39,11 +39,11 @@ namespace naija_cover
                 }
                 SyntaxTree syntaxTree = Parse(argument);
                 CoverageVisitor coverageVisitor = new CoverageVisitor(argument);
-                coverageVisitor.Visit(syntaxTree.GetRoot());
+                var rewrittenNode = coverageVisitor.Visit(syntaxTree.GetRoot());
                 //
                 string fileNameWithoutPath = Path.GetFileName(argument);
                 string fileOutputPath = Path.Combine(outputDirectory, fileNameWithoutPath);
-                File.WriteAllText(fileOutputPath, syntaxTree.ToString());
+                File.WriteAllText(fileOutputPath, rewrittenNode.ToString());
             }
             // Make sure coverage is written before closing
             AppDomain.CurrentDomain.ProcessExit += (sender, eventArgs) => CoverageTracker.WriteCoverageToFile();
