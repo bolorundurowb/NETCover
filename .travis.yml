@@ -3,6 +3,7 @@ solution: naija-cover.sln
 mono:
  - latest
 install:
-  - nuget restore naija-cover.sln
+  - wget https://dist.nuget.org/win-x86-commandline/latest/nuget.exe
+  - mono nuget.exe restore naija-cover.sln
 script:
   - xbuild /p:Configuration=Release naija-cover.sln
