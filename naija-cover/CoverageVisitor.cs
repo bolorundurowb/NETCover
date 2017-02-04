@@ -24,7 +24,7 @@ namespace naija_cover
         {
             var lineNumber = node.GetLocation().GetLineSpan().StartLinePosition.Line;
             CoverageTracker.MarkExecutable(fileName, lineNumber);
-            //
+
             var method = MemberAccessExpression(SyntaxKind.SimpleMemberAccessExpression,
                 MemberAccessExpression(SyntaxKind.SimpleMemberAccessExpression,
                     MemberAccessExpression(SyntaxKind.SimpleMemberAccessExpression,
@@ -36,8 +36,8 @@ namespace naija_cover
             SeparatedSyntaxList<ArgumentSyntax> argumentList;
             if (passInNode)
             {
-//                var nodeArg = Argument();
-                argumentList = SeparatedList(new[] {filePathArg, lineNumberArg, /*nodeArg*/});
+                //var nodeArg = Argument();
+                argumentList = SeparatedList(new[] {filePathArg, lineNumberArg/*, nodeArg*/});
             }
             else
             {
@@ -46,6 +46,21 @@ namespace naija_cover
             var methodCallExpr = ExpressionStatement(
                 InvocationExpression(method, ArgumentList(argumentList)));
             return methodCallExpr;
+        }
+
+        public override SyntaxNode VisitArrayCreationExpression(ArrayCreationExpressionSyntax node)
+        {
+            return base.VisitArrayCreationExpression(node);
+        }
+
+        public override SyntaxNode VisitBinaryExpression(BinaryExpressionSyntax node)
+        {
+            return base.VisitBinaryExpression(node);
+        }
+
+        public override SyntaxNode VisitCastExpression(CastExpressionSyntax node)
+        {
+            return base.VisitCastExpression(node);
         }
     }
 }
