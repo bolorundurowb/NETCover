@@ -62,5 +62,50 @@ namespace naija_cover
         {
             return base.VisitCastExpression(node);
         }
+
+        public override SyntaxNode VisitClassDeclaration(ClassDeclarationSyntax node)
+        {
+            return base.VisitClassDeclaration(node);
+        }
+
+        public override SyntaxNode VisitConditionalExpression(ConditionalExpressionSyntax node)
+        {
+            return base.VisitConditionalExpression(node);
+        }
+
+        public override SyntaxNode VisitFieldDeclaration(FieldDeclarationSyntax node)
+        {
+            return base.VisitFieldDeclaration(node);
+        }
+
+        public override SyntaxNode VisitLiteralExpression(LiteralExpressionSyntax node)
+        {
+            return base.VisitLiteralExpression(node);
+        }
+
+        public override SyntaxNode VisitObjectCreationExpression(ObjectCreationExpressionSyntax node)
+        {
+            return base.VisitObjectCreationExpression(node);
+        }
+
+        public override SyntaxNode VisitThisExpression(ThisExpressionSyntax node)
+        {
+            return base.VisitThisExpression(node);
+        }
+
+        public override SyntaxNode VisitBaseExpression(BaseExpressionSyntax node)
+        {
+            return base.VisitBaseExpression(node);
+        }
+
+        public override SyntaxNode VisitNamespaceDeclaration(NamespaceDeclarationSyntax node)
+        {
+            return base.VisitNamespaceDeclaration(node);
+        }
+
+        private bool InsideStatement(SyntaxNode node)
+        {
+            return true;
+        }
     }
 }
