@@ -6,7 +6,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using naija_cover.Runtime;
 
-namespace naija_cover
+namespace NETCover
 {
     internal class Program
     {

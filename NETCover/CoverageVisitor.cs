@@ -4,7 +4,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using naija_cover.Runtime;
 using static Microsoft.CodeAnalysis.CSharp.SyntaxFactory;
 
-namespace naija_cover
+namespace NETCover
 {
     public class CoverageVisitor : CSharpSyntaxRewriter
     {
