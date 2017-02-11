@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.0.0
 MinimumVisualStudioVersion = 10.0.0.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "naija_cover", "naija-cover/naija-cover.csproj", "{7186AAA6-E119-4ADB-B53B-ECEB5685839F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "naija_cover", "NETCover/NETCover.csproj", "{7186AAA6-E119-4ADB-B53B-ECEB5685839F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
