@@ -15,12 +15,12 @@ namespace naija_cover
             fileName = filename;
         }
 
-        private SyntaxNode MakeCoverageTrackingCall(TypeDeclarationSyntax node)
+        private SyntaxNode MakeCoverageTrackingCall(SyntaxNode node)
         {
             return MakeCoverageTrackingCall(node, true);
         }
 
-        private SyntaxNode MakeCoverageTrackingCall(TypeDeclarationSyntax node, bool passInNode)
+        private SyntaxNode MakeCoverageTrackingCall(SyntaxNode node, bool passInNode)
         {
             var lineNumber = node.GetLocation().GetLineSpan().StartLinePosition.Line;
             CoverageTracker.MarkExecutable(fileName, lineNumber);
@@ -50,62 +50,70 @@ namespace naija_cover
 
         public override SyntaxNode VisitArrayCreationExpression(ArrayCreationExpressionSyntax node)
         {
-            return base.VisitArrayCreationExpression(node);
+            return MakeCoverageTrackingCall(node);
         }
 
         public override SyntaxNode VisitBinaryExpression(BinaryExpressionSyntax node)
         {
-            return base.VisitBinaryExpression(node);
+            return MakeCoverageTrackingCall(node);
         }
 
         public override SyntaxNode VisitCastExpression(CastExpressionSyntax node)
         {
-            return base.VisitCastExpression(node);
+            return MakeCoverageTrackingCall(node);
         }
 
         public override SyntaxNode VisitClassDeclaration(ClassDeclarationSyntax node)
         {
-            return base.VisitClassDeclaration(node);
+            return MakeCoverageTrackingCall(node);
         }
 
         public override SyntaxNode VisitConditionalExpression(ConditionalExpressionSyntax node)
         {
-            return base.VisitConditionalExpression(node);
+            return MakeCoverageTrackingCall(node);
         }
 
         public override SyntaxNode VisitFieldDeclaration(FieldDeclarationSyntax node)
         {
-            return base.VisitFieldDeclaration(node);
+            return MakeCoverageTrackingCall(node);
         }
 
         public override SyntaxNode VisitLiteralExpression(LiteralExpressionSyntax node)
         {
-            return base.VisitLiteralExpression(node);
+            return MakeCoverageTrackingCall(node);
         }
 
         public override SyntaxNode VisitObjectCreationExpression(ObjectCreationExpressionSyntax node)
         {
-            return base.VisitObjectCreationExpression(node);
+            return MakeCoverageTrackingCall(node);
         }
 
         public override SyntaxNode VisitThisExpression(ThisExpressionSyntax node)
         {
-            return base.VisitThisExpression(node);
+            return MakeCoverageTrackingCall(node);
         }
 
         public override SyntaxNode VisitBaseExpression(BaseExpressionSyntax node)
         {
-            return base.VisitBaseExpression(node);
+            return MakeCoverageTrackingCall(node);
         }
 
         public override SyntaxNode VisitNamespaceDeclaration(NamespaceDeclarationSyntax node)
         {
-            return base.VisitNamespaceDeclaration(node);
+            if (InsideStatement(node))
+            {
+                return MakeCoverageTrackingCall(node);
+            }
+            return node;
         }
 
         private bool InsideStatement(SyntaxNode node)
         {
-            return true;
+            while (node != null && !(node.GetType() == typeof(StatementSyntax)))
+            {
+                node = node.Parent;
+            }
+            return node.GetType() == typeof(StatementSyntax);
         }
     }
 }
