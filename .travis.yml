@@ -3,9 +3,7 @@ solution: naija-cover.sln
 mono:
  - latest
 install:
-  - sudo apt-get install -y gtk-sharp2
   - wget https://dist.nuget.org/win-x86-commandline/latest/nuget.exe
   - mono nuget.exe restore naija-cover.sln
-  - nuget install NUnit.Runners -Version 3.5.0 -OutputDirectory testrunner
 script:
   - xbuild /p:Configuration=Release naija-cover.sln
