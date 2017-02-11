@@ -4,7 +4,7 @@ using System.IO;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
-using naija_cover.Runtime;
+using NETCover.Runtime;
 
 namespace NETCover
 {
