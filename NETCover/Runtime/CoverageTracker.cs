@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
-namespace naija_cover.Runtime
+namespace NETCover.Runtime
 {
     public class CoverageTracker
     {

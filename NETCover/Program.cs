@@ -4,9 +4,9 @@ using System.IO;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
-using naija_cover.Runtime;
+using NETCover.Runtime;
 
-namespace naija_cover
+namespace NETCover
 {
     internal class Program
     {
