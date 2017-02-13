@@ -4,6 +4,7 @@
 // Author:
 //   Sergiy Sakharov (sakharov@gmail.com)
 //
+// (c) 2017 NET Cover Contributors
 // (C) 2009 Sergiy Sakharov
 //
 // Permission is hereby granted, free of charge, to any person obtaining
