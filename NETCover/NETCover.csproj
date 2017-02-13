@@ -1,20 +1,19 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{7186AAA6-E119-4ADB-B53B-ECEB5685839F}</ProjectGuid>
-    <ProjectTypeGuids>{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+      <ProductVersion>9.0.30729</ProductVersion>
+      <SchemaVersion>2.0</SchemaVersion>
+      <ProjectGuid>{6C574A19-5A67-485D-84B1-5569BEB1601A}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>naija_cover</RootNamespace>
-    <AssemblyName>naija_cover</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+      <RootNamespace>Coverage</RootNamespace>
+      <AssemblyName>Coverage</AssemblyName>
+      <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -24,7 +23,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -33,43 +31,56 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.CodeAnalysis, Version=1.3.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.CodeAnalysis.Common.1.3.2\lib\net45\Microsoft.CodeAnalysis.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Microsoft.CodeAnalysis.CSharp, Version=1.3.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.CodeAnalysis.CSharp.1.3.2\lib\net45\Microsoft.CodeAnalysis.CSharp.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System" />
-    <Reference Include="System.Collections.Immutable, Version=1.1.37.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Collections.Immutable.1.1.37\lib\dotnet\System.Collections.Immutable.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System.Core" />
-    <Reference Include="System.Reflection.Metadata, Version=1.2.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Reflection.Metadata.1.2.0\lib\portable-net45+win8\System.Reflection.Metadata.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System.Xml.Linq" />
+      <Reference Include="System.Web"/>
+      <Reference Include="System.Data"/>
     <Reference Include="System.Xml" />
-    <Reference Include="System.Collections.Immutable">
-      <HintPath>..\packages\System.Collections.Immutable.1.1.37\lib\dotnet\System.Collections.Immutable.dll
-          </HintPath>
-    </Reference>
-    <Reference Include="System.Reflection.Metadata">
-      <HintPath>
-              ..\packages\System.Reflection.Metadata.1.2.0\lib\portable-net45+win8\System.Reflection.Metadata.dll
-          </HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Program.cs" />
+      <Compile Include="Common\Configuration.cs"/>
+      <Compile Include="Common\NameFilter.cs"/>
+      <Compile Include="Common\Executor.cs"/>
+      <Compile Include="Common\BaseVisitor.cs"/>
+      <Compile Include="Common\CompositeVisitor.cs"/>
+      <Compile Include="Common\Context.cs"/>
+      <Compile Include="Common\CodeSegment.cs"/>
+      <Compile Include="Common\PdbReader.cs"/>
+      <Compile Include="Common\IProgramDatabaseReader.cs"/>
+      <Compile Include="Instrument\CounterAssemblyBuilder.cs"/>
+      <Compile Include="Instrument\InstrumentorVisitor.cs"/>
+      <Compile Include="Report\ReportVisitor.cs"/>
+      <Compile Include="Runner.cs"/>
     <Compile Include="Properties\AssemblyInfo.cs" />
+      <Compile Include="Report\CoverageReport.cs"/>
+      <Compile Include="Report\MethodEntry.cs"/>
+      <Compile Include="Report\ModuleEntry.cs"/>
+      <Compile Include="Report\PointEntry.cs"/>
   </ItemGroup>
   <ItemGroup>
-    <Analyzer Include="..\packages\Microsoft.CodeAnalysis.Analyzers.1.1.0\analyzers\dotnet\cs\Microsoft.CodeAnalysis.Analyzers.dll" />
-    <Analyzer Include="..\packages\Microsoft.CodeAnalysis.Analyzers.1.1.0\analyzers\dotnet\cs\Microsoft.CodeAnalysis.CSharp.Analyzers.dll" />
+      <ProjectReference Include="..\Mono.Tools.Pdb2Mdb\Mono.Tools.Pdb2Mdb.csproj">
+          <Project>{FAF4A1D4-088E-4FAB-875B-29981D0E6392}</Project>
+          <Name>Mono.Tools.Pdb2Mdb</Name>
+      </ProjectReference>
+      <ProjectReference Include="..\Mono.Cecil\Mono.Cecil.csproj">
+          <Project>{F94593F9-0CE2-4F22-A11C-66C272B2E3DB}</Project>
+          <Name>Mono.Cecil</Name>
+      </ProjectReference>
+      <ProjectReference Include="..\NETCover.Counter\NETCover.Counter.csproj">
+          <Project>{06AADE13-67EB-451C-844B-95ACAE94068C}</Project>
+          <Name>NETCover.Counter</Name>
+      </ProjectReference>
+  </ItemGroup>
+    <ItemGroup>
+        <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+            <Visible>False</Visible>
+            <ProductName>.NET Framework 3.5 SP1</ProductName>
+            <Install>true</Install>
+        </BootstrapperPackage>
+        <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+            <Visible>False</Visible>
+            <ProductName>Windows Installer 3.1</ProductName>
+            <Install>true</Install>
+        </BootstrapperPackage>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
