@@ -8,8 +8,8 @@
         <ProjectGuid>{06AADE13-67EB-451C-844B-95ACAE94068C}</ProjectGuid>
         <OutputType>Library</OutputType>
         <AppDesignerFolder>Properties</AppDesignerFolder>
-        <RootNamespace>Coverage</RootNamespace>
-        <AssemblyName>Coverage.Counter</AssemblyName>
+        <RootNamespace>NETCover</RootNamespace>
+        <AssemblyName>NETCover.Counter</AssemblyName>
         <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
         <FileAlignment>512</FileAlignment>
     </PropertyGroup>
