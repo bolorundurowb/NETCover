@@ -28,10 +28,10 @@
 //
 
 using System.Collections.Generic;
-using System.Linq;
 using Microsoft.Cci.Pdb;
 using Mono.Cecil;
 using System.IO;
+using System.Linq;
 
 namespace NETCover.Common
 {
