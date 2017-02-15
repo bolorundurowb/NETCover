@@ -49,31 +49,45 @@ namespace NETCover
 
 			for (var i = 0; i < args.Length; i++)
 			{
-				switch (args[i])
-				{
-					case "/x"://next argument is a coverage file name
-						optionsOnly = true;
-						if (i < args.Length - 1)
-							Configuration.CoverageFile = args[i + 1];
-						break;
-					case "/r":
-						optionsOnly = true;
-						Configuration.NamingMode = Configuration.NamingModes.BackupOriginals;
-						break;
-					case "/h":
-						ShowHelp();
-						return;
-					default:
-						if(optionsOnly)
-							break;
+			    switch (args[i])
+			    {
+			        case "/x": //next argument is a coverage file name
+			            optionsOnly = true;
+			            if (i < args.Length - 1)
+			                Configuration.CoverageFile = args[i + 1];
+			            break;
+			        case "/r":
+			            optionsOnly = true;
+			            Configuration.NamingMode = Configuration.NamingModes.BackupOriginals;
+			            break;
+			        case "/h":
+			            ShowHelp();
+			            return;
+			        case "/y":
+			            optionsOnly = true;
+			            if (i < args.Length - 1)
+			            {
+			                if (args[i + 1].ToLower() == "lcov")
+			                {
+			                    Configuration.OutputType = Configuration.OutputFileType.Lcov;
+			                }
+			                else
+			                {
+			                    Configuration.OutputType = Configuration.OutputFileType.Xml;
+			                }
+			            }
+			            break;
+			        default:
+			            if (optionsOnly)
+			                break;
 
-						if(args[i][0] != '-')
-							assemblies.AddRange(ResolveFilesByMask(args[i]));
-						else
-							Configuration.NameFilters.Add(ParseFilter(args[i].Substring(1)));
+			            if (args[i][0] != '-')
+			                assemblies.AddRange(ResolveFilesByMask(args[i]));
+			            else
+			                Configuration.NameFilters.Add(ParseFilter(args[i].Substring(1)));
 
-						break;
-				}
+			            break;
+			    }
 			}
 
 			var executor = new Executor(assemblies.ToArray());
@@ -106,35 +120,37 @@ namespace NETCover
 		private static void ShowHelp()
 		{
 			Console.WriteLine(
-@"Usage: coverage.exe {<assemblyPaths>} [{-[<ExclusionType>:]NameFilter}] [<commands> [<commandArgs>]]
+            @"Usage: coverage.exe {<assemblyPaths>} [{-[<ExclusionType>:]NameFilter}] [<commands> [<commandArgs>]]
 
-Exclusion Types:
-    f:  filter files by name
+            Exclusion Types:
+                f:  filter files by name
 
-    s:  filter assemblies by name
-           This could be useful if strong name for some
-           assembly should be weakened, however, coverage
-           report is redundant for it
+                s:  filter assemblies by name
+                       This could be useful if strong name for some
+                       assembly should be weakened, however, coverage
+                       report is redundant for it
 
-    t:  filter types by full name
+                t:  filter types by full name
 
-    m:  filter methods by full name
+                m:  filter methods by full name
 
-    default (a:)  filter members by their custom attribute names
+                default (a:)  filter members by their custom attribute names
 
-Commands:
-    /r  If this command is selected - instrumented assemblies replace existing ones.
-        Old assemblies are backed up along with corresponding pdb files
+            Commands:
+                /r  If this command is selected - instrumented assemblies replace existing ones.
+                    Old assemblies are backed up along with corresponding pdb files
 
-    /x  Path to a coverage xml file
+                /x  Path to a coverage file
 
-Example command line to launch instrumenting:
-    coverage myapp.exe myapp.lib.dll -CodeGeneratedAttribute -t:Test /r /x coverage2.xml
+                /y  A value of 'lcov' or 'xml' to specify the coverage file output type
 
-    This will generate instrumented myapp.exe and myapp.lib.dll, moving old assemblies into
-    myapp.bak.exe and myapp.lib.bak.dll respectively. Members marked by attributes that contain
-    'CodeGeneratedAttribute' in their name as well as types that contain 'Test' in their full names
-    will be excluded from report");
+            Example command line to launch instrumenting:
+                coverage myapp.exe myapp.lib.dll -CodeGeneratedAttribute -t:Test /r /x coverage2.xml
+
+                This will generate instrumented myapp.exe and myapp.lib.dll, moving old assemblies into
+                myapp.bak.exe and myapp.lib.bak.dll respectively. Members marked by attributes that contain
+                'CodeGeneratedAttribute' in their name as well as types that contain 'Test' in their full names
+                will be excluded from report");
 		}
 	}
 }

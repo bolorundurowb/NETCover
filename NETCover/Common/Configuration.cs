@@ -45,9 +45,22 @@ namespace NETCover.Common
 			BackupOriginals
 		}
 
+	    public enum OutputFileType
+	    {
+	        /// <summary>
+	        /// An xml file formatted in an NCover manner. The default
+	        /// </summary>
+	        Xml,
+	        /// <summary>
+	        /// An lcov file compatible with standard
+	        /// </summary>
+	        Lcov
+	    }
+
 		public static void Initialize()
 		{
 			CoverageFile = "coverage.xml";
+		    OutputType = OutputFileType.Xml;
 			NamingMode = NamingModes.MarkInstrumented;
 			NameFilters = new List<NameFilter>();
 		}
@@ -66,5 +79,10 @@ namespace NETCover.Common
 		/// List of member name filters
 		/// </summary>
 		public static IList<NameFilter> NameFilters { get; set; }
+
+	    /// <summary>
+	    /// The desired output of the coverage tool
+	    /// </summary>
+	    public static OutputFileType OutputType { get; set; }
 	}
 }
