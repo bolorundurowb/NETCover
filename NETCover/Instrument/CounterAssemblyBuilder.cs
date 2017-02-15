@@ -59,7 +59,7 @@ namespace NETCover.Instrument
 			{
 				if(_counterMethodDef == null)
 				{
-					///Retrieving MethodInfo using expressions will guarantee compile time error if method signature changes
+					// Retrieving MethodInfo using expressions will guarantee compile time error if method signature changes
 					Expression<Action<int, int>> counterExpression = (moduleId, id) => Counter.Hit(moduleId, id);
 					var counterMethodToken = ((MethodCallExpression)counterExpression.Body).Method.MetadataToken;
 					_counterMethodDef = (MethodDefinition)CounterAssemblyDef.MainModule.LookupByToken(new MetadataToken(counterMethodToken));

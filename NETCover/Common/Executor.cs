@@ -119,7 +119,7 @@ namespace NETCover.Common
 			_context.SkipType = IsFiltered(typeDef);
 			visitor.VisitType(typeDef, _context);
 
-			///Take all methods and constructors definitions
+			// Take all methods and constructors definitions
 			var methods = typeDef.Methods.Cast<MethodDefinition>().Union(typeDef.Constructors.Cast<MethodDefinition>());
 
 			foreach (var methodDef in methods)
@@ -145,24 +145,24 @@ namespace NETCover.Common
 			_context.SkipMethod = IsFiltered(methodDef);
 			visitor.VisitMethod(methodDef, _context);
 
-			///Probably there is no need in sequence point enumeration
-			///if this method should be skipped from instrumentation...
-			///But still for some reason there is an "excluded" attribute defined
-			///for sequence point in NCover's xml...
-			///In case of this optimization following lines should be uncomented:
-			//if(!_context.ShouldInstrumentCurrentMember)
-			//	return;
+			// Probably there is no need in sequence point enumeration
+			// if this method should be skipped from instrumentation...
+			// But still for some reason there is an "excluded" attribute defined
+			// for sequence point in NCover's xml...
+			// In case of this optimization following lines should be uncomented:
+			// if(!_context.ShouldInstrumentCurrentMember)
+			//	 return;
 
 			var instructions = methodDef.Body.Instructions;
 			var instIdx = instructions.Count - 1;
 			foreach (var offsetPointPair in segments.OrderByDescending(pair => pair.Key))
 			{
 				var pair = offsetPointPair;
-				///take only these sequence poins that have corresponding code segment locations
+				// take only these sequence poins that have corresponding code segment locations
 				if (pair.Value.StartLine == FeeFeeMarker)
 					continue;
 
-				///Locate instruction by offset
+				// Locate instruction by offset
 				while (instIdx > 0 && (instructions[instIdx].Offset > pair.Key || instructions[instIdx].Offset == 0))
 					instIdx--;
 				var instruction = instructions[instIdx];
