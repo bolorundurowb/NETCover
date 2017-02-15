@@ -48,7 +48,7 @@ namespace NETCover
 		static Counter()
 		{
 			_startTime = DateTime.Now;
-			///These handlers execute flushing all hit counts to the xml file
+			// These handlers execute flushing all hit counts to the xml file
 			AppDomain.CurrentDomain.DomainUnload += delegate { FlushCounter(); };
 			AppDomain.CurrentDomain.ProcessExit += delegate { FlushCounter(); };
 		}
@@ -84,6 +84,7 @@ namespace NETCover
 			}
 
 			_measureTime = DateTime.Now;
+
 			UpdateFileReport(hitCounts);
 		}
 
