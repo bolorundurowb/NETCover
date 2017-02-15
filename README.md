@@ -32,5 +32,19 @@ _Commands:_
 
 > /x <coverage file path> - Path to a coverage XML file
 
+## Usage Example
+```bash
+coverage.exe C:\Temp\myapp.exe C:\Temp\myapp.lib.dll -CodeGeneratedAttribute -t:Test /r /x C:\Temp\coverage2.xml 
+```
 
+This will generate instrumented `myapp.exe` and `myapp.lib.dll`, moving old assemblies into `myapp.bak.exe` and `myapp.lib.bak.dll` respectively. Members marked by attributes that contain `'CodeGeneratedAttribute'` in their name as well as types that contain `'Test'` in their full names will be excluded from the report.
 
+## Possible Improvements
+There are a couple of things that come to my mind (except making the tool to be bug-free).
+
+- Remove duplicate instruments - and therefore improve performance and precision
+- Make flushing of hit counts to XML file immediate
+- Add support for Mono mdb files and port the tool to Linux (I am not sure that this is necessary because there is already a monocov tool for Mono)
+- Create pdb[/mdb] files for instrumented assemblies, so that it will be possible to debug even those
+- Calculate coverage without pdb files - this will require syntax analysis of the IL code. As for this point, I had some thoughts to reuse `nop` operators as indicators of code branching, however, it requires DLL do be built using debug configuration and therefore is not likely to be used (because debug-built assemblies usually have pdb-s with them)
+- Mixed mode - reuse pdbs of different builds as a reference
