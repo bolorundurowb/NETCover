@@ -53,16 +53,9 @@ namespace NETCover.Report
 
 		public string GetXml()
 		{
-			return string.Format(
-				@"<seqpnt visitcount=""{0}"" line=""{1}"" column=""{2}"" endline=""{3}"" endcolumn=""{4}"" excluded=""{5}"" document=""{6}"" />",
-				VisitCount,
-				Line,
-				Column,
-				EndLine,
-				EndColumn,
-				Excluded.ToString().ToLower(),
-				Document
-				);
+			return $@"<seqpnt visitcount=""{VisitCount}"" line=""{Line}"" column=""{Column}"" endline=""{EndLine}"" endcolumn=""{
+			        EndColumn
+			    }"" excluded=""{Excluded.ToString().ToLower()}"" document=""{Document}"" />";
 		}
 	}
 }

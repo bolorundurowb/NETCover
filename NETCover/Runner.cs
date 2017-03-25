@@ -67,14 +67,7 @@ namespace NETCover
 			            optionsOnly = true;
 			            if (i < args.Length - 1)
 			            {
-			                if (args[i + 1].ToLower() == "lcov")
-			                {
-			                    Configuration.OutputType = Configuration.OutputFileType.Lcov;
-			                }
-			                else
-			                {
-			                    Configuration.OutputType = Configuration.OutputFileType.Xml;
-			                }
+			                Configuration.OutputType = args[i + 1].ToLower() == "lcov" ? Configuration.OutputFileType.Lcov : Configuration.OutputFileType.Xml;
 			            }
 			            break;
 			        default:
