@@ -29,6 +29,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace NETCover.Report
@@ -106,23 +107,5 @@ namespace NETCover.Report
 
 			return sb.ToString();
 		}
-
-	    public string GetLcov()
-	    {
-	        StringBuilder sb = new StringBuilder();
-	        foreach (ModuleEntry module in Modules)
-	        {
-	            sb.Append($"SF:{module.Assembly}\n");
-	            foreach (MethodEntry method in module.Methods)
-	            {
-	                foreach (PointEntry point in method.Points)
-	                {
-	                    sb.Append($"DA:{point.Line},{(point.Excluded ? 0 : 1)}");
-	                }
-	            }
-	            sb.Append("end_of_record\n");
-	        }
-	        return sb.ToString();
-	    }
 	}
 }
