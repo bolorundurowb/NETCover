@@ -63,13 +63,6 @@ namespace NETCover
 			        case "/h":
 			            ShowHelp();
 			            return;
-			        case "/y":
-			            optionsOnly = true;
-			            if (i < args.Length - 1)
-			            {
-			                Configuration.OutputType = args[i + 1].ToLower() == "lcov" ? Configuration.OutputFileType.Lcov : Configuration.OutputFileType.Xml;
-			            }
-			            break;
 			        default:
 			            if (optionsOnly)
 			                break;
@@ -93,11 +86,13 @@ namespace NETCover
 			if (filterStr[1] != ':')
 				return new NameFilter { Type = NameFilter.FilterTypes.AttributeFilter, FilteredName = filterStr };
 
-			var filter = new NameFilter();
-			filter.Type = (NameFilter.FilterTypes)char.ToLower(filterStr[0]);
-			filter.FilteredName = filterStr.Substring(2);
+		    var filter = new NameFilter
+		    {
+		        Type = (NameFilter.FilterTypes) char.ToLower(filterStr[0]),
+		        FilteredName = filterStr.Substring(2)
+		    };
 
-			return filter;
+		    return filter;
 		}
 
 		private static IEnumerable<string> ResolveFilesByMask(string filePathMask)
@@ -135,10 +130,8 @@ namespace NETCover
 
                 /x  Path to a coverage file
 
-                /y  A value of 'lcov' or 'xml' to specify the coverage file output type
-
             Example command line to launch instrumenting:
-                coverage myapp.exe myapp.lib.dll -CodeGeneratedAttribute -t:Test /r /x coverage2.xml
+                NETCover myapp.exe myapp.lib.dll -CodeGeneratedAttribute -t:Test /r /x coverage2.xml
 
                 This will generate instrumented myapp.exe and myapp.lib.dll, moving old assemblies into
                 myapp.bak.exe and myapp.lib.bak.dll respectively. Members marked by attributes that contain

@@ -60,12 +60,9 @@ namespace NETCover
 		/// Location of coverage xml file
 		/// This property's IL code is modified to store actual file location
 		/// </summary>
-		public static string CoverageFilePath
-		{
-			get { return @"c:\temp\BINS\cReport.xml"; }
-		}
+		public static string CoverageFilePath => @"c:\temp\BINS\cReport.xml";
 
-		/// <summary>
+	    /// <summary>
 		/// This method flushes hit count buffers.
 		/// </summary>
 		public static void FlushCounter()
@@ -101,7 +98,7 @@ namespace NETCover
 			{
 				using (var coverageFile = new FileStream(CoverageFilePath, FileMode.Open, FileAccess.ReadWrite, FileShare.None, 4096, FileOptions.SequentialScan))
 				{
-					///Edit xml report to store new hits
+					//Edit xml report to store new hits
 					var xDoc = XDocument.Load(new XmlTextReader(coverageFile));
 
 					var startTimeAttr = xDoc.Root.Attribute("startTime");
